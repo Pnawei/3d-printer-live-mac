@@ -60,7 +60,7 @@ async function main() {
   let port = null;
   for (const p of [9223, 9110, 9222]) { try { await getJson(`http://127.0.0.1:${p}/json/version`); port = p; break } catch { } }
   if (!port) {
-    const exe = ['C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe', 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe', 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe'].find(p => fs.existsSync(p));
+    const exe = ['/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', '/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge', '/Applications/Chromium.app/Contents/MacOS/Chromium'].find(p => fs.existsSync(p));
     if (!exe) throw new Error('没有可用浏览器');
     port = 9224;
     spawn(exe, ['--remote-debugging-port=9224', '--user-data-dir=' + path.join(__dirname, '.bridge-profile'), '--no-first-run', '--lang=zh-CN', '--window-size=1100,760', 'about:blank'], { detached: true, stdio: 'ignore' }).unref();

@@ -61,31 +61,33 @@ footer b{color:#9fc3e8}
 <main>
  <div class="hero">
   <h1>从零开始，<b>5 步用起来</b></h1>
-  <p>适用于 Windows 10 / 11。全程只需配置一次，之后每天开播双击一个文件即可。</p>
+  <p>适用于 macOS（Intel / Apple Silicon 均可）。全程只需配置一次，之后每天开播双击「头像打印机.app」即可。</p>
   <div class="notice"><b>开源免费：</b>本软件完全开源、免费使用，无任何付费功能或授权限制。使用中请遵守抖音平台规则：软件只读取公开弹幕，不会用你的账号发弹幕、送礼或关注任何人。</div>
  </div>
 
  <div class="step"><div class="num">0</div><div>
   <h3>环境准备（只做一次）</h3>
   <ul>
-   <li>安装 <b>Python 3</b>（官网下载，安装时勾选 <code>Add to PATH</code>），然后命令行执行 <code>pip install pywebview</code></li>
-   <li><b>WebView2 Runtime</b>：Windows 11 自带；Win10 若缺失，去微软官网装一次</li>
-   <li>安装 <b>Node.js</b>（官网 LTS 安装包，一直下一步即可）</li>
-   <li>把软件文件夹放到任意位置，例如 <code>D:\SU\310\5</code></li>
+   <li>安装 <b>Python 3</b>：macOS 自带 <code>/usr/bin/python3</code> 即可直接运行；若提示缺失，用 <code>brew install python3</code> 或到 python.org 安装</li>
+   <li>安装 <b>Google Chrome</b>（必需）：程序窗口与抖音直播抓取都用 Chrome 的应用模式承载。<span class="tip">Edge / Chromium / Brave 也可</span></li>
+   <li>安装 <b>Node.js</b>（仅真实直播抓取需要）：<code>brew install node</code>；只看离线演示可不装</li>
+   <li>把整个软件文件夹放到任意位置（例如 <code>~/Desktop/3d-printer-live</code>），<code>头像打印机.app</code> 需与 <code>launch.py</code> 保持在同一目录</li>
   </ul></div></div>
 
  <div class="step"><div class="num">1</div><div>
   <h3>一键启动</h3>
   <ul>
-   <li>双击 <code>start-all.bat</code>：自动启动打印服务 + 弹出「直播间窗口」+ 打开「头像打印程序」，两个窗口并排</li>
-   <li>也可以分开启动：<code>start.bat</code>（打印服务）+ <code>start-bridge.bat</code>（数据桥）</li>
-   <li>想固定房间号启动：命令行执行 <code>pythonw launch.py --room 房间号 --capture</code>，开播即自动抓取</li>
+   <li>双击 <code>头像打印机.app</code>：自动启动打印服务，并用 Chrome 应用窗口打开「头像打印程序」（无地址栏的独立窗口）</li>
+   <li>首次若提示「无法打开，来自身份不明的开发者」：在 <b>访达</b> 里对该 .app <span class="tip">按住 Control 点按 → 打开</span>，或到「系统设置 → 隐私与安全性」点「仍要打开」</li>
+   <li>也可用脚本启动：双击 <code>start.command</code>（等价于打开 .app）；只挂服务不弹窗口用 <code>run-server-forever.command</code></li>
+   <li>命令行方式：<code>python3 launch.py</code>（开窗口）或 <code>python3 launch.py --server-only</code>（仅服务，自行用浏览器打开 <code>http://127.0.0.1:8080</code>）</li>
   </ul></div></div>
 
  <div class="step"><div class="num">2</div><div>
   <h3>登录抖音（只需一次）</h3>
   <ul>
-   <li>在弹出的「直播间窗口」里扫码/验证登录抖音，登录状态会记住，下次免登录</li>
+   <li>在主程序右侧「直播连接」面板填直播间号或链接，点「<span class="tip">打开直播间窗口</span>」——会用 Chrome 弹出一个独立直播窗口</li>
+   <li>在该窗口里扫码/验证登录抖音，登录状态会记在独立配置里，下次免登录</li>
    <li><span class="tip">登录后头像抓取更全</span>：可以抓到更完整的观众资料卡头像</li>
   </ul></div></div>
 
@@ -120,16 +122,16 @@ footer b{color:#9fc3e8}
   <div class="faq"><b>暂停 / 跳过 / 速度</b><p>「暂停打印」同时冻结打印和流水线；「跳过当前」只丢弃正在打印的这件；演示速度 1× / 4× / 12× 可加速验收。</p></div>
   <div class="faq"><b>切换直播间</b><p>在「直播连接」面板填新房间号或链接回车即可，数据桥自动切换并记住；无需重启程序。</p></div>
   <div class="faq"><b>批量导入头像</b><p>规则演示台里「批量导入头像」可选本地图片，替换演示头像池，仅本机使用不上传。</p></div>
-  <div class="faq"><b>关闭程序</b><p>直接关闭打印程序主窗口即可：程序会自动停止抓取、清理数据桥和它打开的直播窗口。</p></div>
+  <div class="faq"><b>关闭程序</b><p>关闭 Chrome 应用窗口，或对 <code>头像打印机.app</code> 按 <code>⌘Q</code> 退出即可：程序会自动停止抓取、清理数据桥并关闭本地服务。</p></div>
  </div>
 
  <h2 class="sec">常见问题 <small>FAQ</small></h2>
- <div class="faq"><b>双击后页面打不开 / 提示 8080 被占用？</b><p>说明打印服务端口被其他程序占用。关掉占用 8080 的程序（或重启电脑）后再双击 start-all.bat。</p></div>
- <div class="faq"><b>点「开始抓取」提示端口 8765 被占用？</b><p>有旧的数据桥还在运行。按提示关闭旧版 ServerGuard / BridgeGuard / 旧数据桥窗口，再重新开始抓取。</p></div>
+ <div class="faq"><b>双击 .app 后页面打不开 / 提示 8080 被占用？</b><p>说明打印服务端口被其他程序占用。关掉占用 8080 的程序（或重启）后再双击 <code>头像打印机.app</code>；程序本身也会在 8080 被占时自动改用 8081/8181/8088 等备用端口。</p></div>
+ <div class="faq"><b>点「开始抓取」提示端口 8765 被占用？</b><p>有旧的数据桥（node 进程）还在运行。在终端执行 <code>pkill -f douyin-bridge.mjs</code> 关闭旧数据桥，再重新开始抓取。</p></div>
  <div class="faq"><b>抓取状态一直是「等待直播动态」？</b><p>直播间窗口还没登录或没进入直播间。先在直播窗口完成登录并进入房间，再点开始抓取。</p></div>
  <div class="faq"><b>有些观众显示彩色首字而不是照片头像？</b><p>TA 的头像暂时没抓到（比如已滚出屏幕）。软件会自动多轮点击资料卡补取，观众多发几条评论通常就能抓到真实头像。</p></div>
  <div class="faq"><b>30 秒没人说话，打印机还在打印？</b><p>这是「冷场保护」：自动补测试头像让画面不空转。有真实观众消息时立刻恢复真人优先，测试头像自动让位。</p></div>
- <div class="faq"><b>没有声音？</b><p>浏览器策略要求先有交互：点击页面任意位置即可；桌面版窗口默认允许声音。检查系统音量与输出设备。</p></div>
+ <div class="faq"><b>没有声音？</b><p>浏览器策略要求先有交互：点击页面任意位置即可启用声音；用 .app 打开的 Chrome 应用窗口同样如此。再检查系统「声音」输出设备与音量。</p></div>
  <div class="faq"><b>分数是真实的吗？</b><p>不是。评分为 60–95 的娱乐随机分，不同分数段对应不同打印材质（胡桃木/拉丝铝/石材/陶瓷等），仅作直播互动效果。</p></div>
  <div class="faq"><b>会被抖音封号吗？</b><p>软件只读取直播间公开弹幕与公开头像，不登录、不发弹幕、不点赞、不送礼，不做任何写操作，与观众自己观看直播无异。请勿将其用于任何违法违规用途。</p></div>
 

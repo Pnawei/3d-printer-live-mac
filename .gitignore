@@ -3,6 +3,9 @@
 .live-webview-profile/
 .printer-webview-profile/
 .scene-webview-profile/
+.printer-chrome-profile/
+.scene-chrome-profile/
+.app-chrome-profile/
 
 # ===== 运行状态与日志（含观众昵称、弹幕、房间号）=====
 *.log

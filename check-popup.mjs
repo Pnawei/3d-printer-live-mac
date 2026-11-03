@@ -15,7 +15,7 @@ const results = [];
 const ok = (name, cond, detail = '') => { results.push([cond ? 'PASS' : 'FAIL', name, detail]); console.log((cond ? '✅' : '❌') + ' ' + name + (detail ? ' —— ' + detail : '')) };
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const getJson = u => new Promise((res, rej) => { const q = http.get(u, r => { let d = ''; r.on('data', c => d += c); r.on('end', () => { try { res(JSON.parse(d)) } catch (e) { rej(e) } }); }); q.on('error', rej); q.end(); });
-const CHROME = ['C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe', 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe', 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe'].find(p => fs.existsSync(p));
+const CHROME = ['/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', '/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge', '/Applications/Chromium.app/Contents/MacOS/Chromium'].find(p => fs.existsSync(p));
 
 let browserProc = null, browserConn = null;
 async function startBrowser() {
